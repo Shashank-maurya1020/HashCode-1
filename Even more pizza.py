@@ -16,10 +16,8 @@ import random as rm
 
 # objective 1:
 def select_pizza_for(n: int) -> list[int]:
-    _ = [n]
-    for i in range(n):
-        _ += [choice()]
-    if len(_) - 1 == n:
+    _ = choice(n)
+    if len(_) == n:
         return _  # format: [n-person team, pizza1, pizza2...]
     else:
         # if pizza count is less then n-person team
@@ -29,12 +27,8 @@ def select_pizza_for(n: int) -> list[int]:
 
 
 # objective 2:
-def choice() -> int:
-    _________ = rm.choice(available)
-    if _________ not in visited:
-        visited.add(_________)
-        return _________
-    return choice()
+def choice(n: int) -> list[int]:
+    return available[0:n]
 
 
 # objective 3:
@@ -54,7 +48,12 @@ def calculate_score(delivery: list[int]) -> int:
 def sort_pizza():
     temp_set = set()
     for i in pizza.keys():
-
+        temp_set.add(pizza[i][0])
+    temp_set = sorted(temp_set, reverse=True)
+    for i in temp_set:
+        for j in pizza.keys():
+            if i == pizza[j][0]:
+                available.append(j)
 
 
 # input
@@ -62,7 +61,8 @@ pizza_count, team_of_two, team_of_three, team_of_four = map(int, input().split()
 pizza = {i: input().split() for i in range(pizza_count)}
 
 visited = set()  # to check if pizza is repeated or not
-available = list(pizza.keys())
+available = []
+
 
 # driver code
 if __name__ == '__main__':
